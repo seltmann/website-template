@@ -19,8 +19,6 @@ Central to my research are natural history collections - massive sets of biologi
 As informational resources, these collections hold tremendous value, but remain underused. There are presently large-scale initiatives to digitize the biological material contained within them, as evidenced by funding initiatives such as the National Science Foundation’s Advancing Digitization of Biological Collections (ADBC) program, the primary funding support for my current work. A major focus of my research is to combine disparate digitization efforts in order to facilitate information processing and biological inquiry. To this end, I examine processes through which we capture information in digital formats, how we publish and share biological information, preserve at risk information, and use this information in scientific activities. At its heart, this process involves the digitization of physical specimens and textual collection event data, how we manage these digital records, how we assess the quality of these data, and how we may augment them with salient metadata. My work is consequently aligned with a major thrust of research in biodiversity informatics that has sought to enable access to biodiversity data troves via computing systems, data science methods, and new technologies.
 
 
-
-
 ## Entomology and Hyemenopterology
 Bees, wasps and ants are one of the most numerous and speciose creatures on the planet. They come in an array of sizes and habits, and humans depend on them for pollination and biocontrol of pests. Many groups of wasps are rare and difficult to study, often eluding scientific study. Presently, the focal areas of my research center on rapidly diversifying cryptic species and diversity of species in coastal California.
 
