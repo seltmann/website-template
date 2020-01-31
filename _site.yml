@@ -1,0 +1,24 @@
+name: My Research Site
+output_dir: '.'
+navbar:
+  title: My Research Site
+  type: inverse
+  left:
+  - text: Home
+    icon: fa-home
+    href: index.html
+  - text: Research
+    icon: fa-bug
+    href: research.html
+  right:
+  - text: Contact me
+    icon: fa-envelope
+    href: mailto:moon@begoniasociety.org
+
+output:
+  html_document:
+    theme: cosmo
+    highlight: textmate
+    lib_dir: site_libs
+    self_contained: no
+

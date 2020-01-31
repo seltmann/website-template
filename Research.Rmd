@@ -1,0 +1,104 @@
+---
+title: "Research Areas"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+<img align="right" src="https://seltmann.github.io/begoniasociety/images/Rplot01.png" width="300">
+My field of research, known as Biodiversity Informatics, aims to advance knowledge in biology and biodiversity by facilitating the digital capture, computational interpretation, and electronic dissemination of biological information. I draw on rich sources of specimen-based information in natural history collections to further our understanding of biodiversity and conservation through research combining biological inquiry, large-scale biological collection digitization, and data science. I am also primarily interested in using these methods to study insects, particlulary those in the order Hymenoptera (bees, wasps, and ants). Insects are numerous, biodiverse, critical to our ecosystems and declining.
+ 
+## Biocollections
+
+
+Central to my research are natural history collections - massive sets of biological specimens that are housed in museums, tissue collections, herbaria, botanical gardens, and zoos, and that have been compiled over several centuries. Together, they constitute our biodiversity libraries. These collections have broad cultural significance, and more importantly, constitute enormous primary resources that support fundamental research in the biological sciences. <img align="left" src="https://seltmann.github.io/begoniasociety/research_files/figure-html/globi-1.png" width="400">These libraries of millions of biological specimens, ranging from preserved pollinating bees to dinosaur remnants, shed light on the past, and illuminate ways that the climate has changed, that species are lost, and how biological knowledge has evolved. They also constitute voucher repositories for specimens used in research and identification of organisms of all varieties.
+
+
+As informational resources, these collections hold tremendous value, but remain underused. There are presently large-scale initiatives to digitize the biological material contained within them, as evidenced by funding initiatives such as the National Science Foundation’s Advancing Digitization of Biological Collections (ADBC) program, the primary funding support for my current work. A major focus of my research is to combine disparate digitization efforts in order to facilitate information processing and biological inquiry. To this end, I examine processes through which we capture information in digital formats, how we publish and share biological information, preserve at risk information, and use this information in scientific activities. At its heart, this process involves the digitization of physical specimens and textual collection event data, how we manage these digital records, how we assess the quality of these data, and how we may augment them with salient metadata. My work is consequently aligned with a major thrust of research in biodiversity informatics that has sought to enable access to biodiversity data troves via computing systems, data science methods, and new technologies.
+
+
+
+
+## Entomology and Hyemenopterology
+Bees, wasps and ants are one of the most numerous and speciose creatures on the planet. They come in an array of sizes and habits, and humans depend on them for pollination and biocontrol of pests. Many groups of wasps are rare and difficult to study, often eluding scientific study. Presently, the focal areas of my research center on rapidly diversifying cryptic species and diversity of species in coastal California.
+
+<center>
+
+```{r idigbio, message=TRUE, warning=FALSE, include=FALSE}
+
+# Katja Seltmann, 2019
+# M259 Visualizing Information
+
+#download data from iDigBio using r API
+#https://www.idigbio.org/portal
+#create simple graph with the data
+
+#load packages
+library(ridigbio)
+library(ggplot2)
+library(dplyr)
+library(tidyr)
+
+bombus <- idig_search_records(rq=list(genus="bombus"), limit=5000)
+
+#group by country and count the country
+bombus %>%
+  group_by(country)
+
+bombus <- add_count(bombus, country)
+```
+
+```{r plot, echo=FALSE, message=TRUE, warning=FALSE}
+#graph the data using ggplot
+theme_set(theme_classic())
+g <- ggplot(bombus, aes(country))
+g + geom_density(aes(fill=factor(log10(n))), alpha=0.8) + 
+  labs(title="bumble bee diversity", 
+       subtitle="",
+       caption="",
+       x="kinds of bumble bees",
+       fill="") +
+  theme(axis.text.x=element_blank(),
+        axis.ticks.x=element_blank()) +
+  theme(legend.position="none")
+```
+
+```{r globi, echo=FALSE, warning=FALSE, message=FALSE, fig.show="hide"}
+
+# Katja Seltmann, 2019
+# M259 Visualizing Information
+
+#download data from globi using r API
+#https://www.globalbioticinteractions.org
+#place data in SQLite database
+#create simple network with the data
+
+#install packages if you dont have them
+#install.packages("rglobi")
+
+
+#load packages
+library(rglobi)
+library(ggplot2)
+library("dplyr")
+library("tidyr")
+require(igraph)
+
+#get interactions of bumble bees
+bumblebeesInteractions <- get_interactions_by_taxa(sourcetaxon = "bombus")
+
+#create a new dataframe for a network graph (vertex, edges)
+bsk <- data.frame(bumblebeesInteractions$source_taxon_name,bumblebeesInteractions$target_taxon_name)
+
+#describe network
+bsk.network<-graph.data.frame(bsk, directed=F)
+
+#plot the graph
+par(mar=c(0,0,0,0))
+plot(bsk.network,vertex.size=5, vertex.label=NA)
+```
+
+
+</center>
